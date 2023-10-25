@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  margin-top: -200px;
+  margin-top: -400px;
 }
 
 .logo {
@@ -31,6 +31,15 @@
 .modal>form>button {
   margin-top: 30px;
   width: 200px;
+}
+
+.closeButton {
+  background-color: rgb(40, 40, 40);
+  font-size: 12px;
+  position:absolute;
+  right: 3px;
+  top: 6px;
+  padding: 5px 12px;
 }
 
 input {

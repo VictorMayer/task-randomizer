@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function CreateTasks({ tasks, setTasks, modal, setModal }) {
+export default function CreateTasks({ tasks, setTasks, createTaskModal, setCreateTaskModal }) {
   const [taskTitleToCreate, setTaskTitleToCreate] = useState("")
   const [isThereDescription, setIsThereDescription] = useState(false);
   const [description, setDescription] = useState("");
@@ -9,7 +9,7 @@ export default function CreateTasks({ tasks, setTasks, modal, setModal }) {
   const createNewTask = (e) => {
     e.preventDefault();
     console.log(taskTitleToCreate);
-    setModal(true);
+    setCreateTaskModal(true);
   }
 
   const saveTaskToStorage = (e) => {
@@ -30,7 +30,7 @@ export default function CreateTasks({ tasks, setTasks, modal, setModal }) {
 
   const setModalInitialStates = () => {
     setTaskTitleToCreate("");
-    setModal(false);
+    setCreateTaskModal(false);
     setIsThereDescription(false);
     setDescription("");
     setDuration("");
@@ -39,10 +39,11 @@ export default function CreateTasks({ tasks, setTasks, modal, setModal }) {
   return (
     <>
       <form onSubmit={createNewTask}>
-        <input type='text' placeholder='Create new task' value={taskTitleToCreate} onFocus={() => setModal(true)} onChange={(e) => setTaskTitleToCreate(e.target.value)} />
+        <input type='text' placeholder='Create new task' value={taskTitleToCreate} onFocus={() => setCreateTaskModal(true)} onChange={(e) => setTaskTitleToCreate(e.target.value)} />
       </form>
         { isThereDescription ? <input type="text" placeholder="Description" autoFocus={true} value={description} onChange={(e) => setDescription(e.target.value)}/> : <></> }
-      <dialog open={modal} className='modal'>
+      <dialog open={createTaskModal} className='modal'>
+        <button className='closeButton' onClick={setModalInitialStates}>X</button>
         <p>Task Title: <br/> {taskTitleToCreate}</p>
         <br/>
         

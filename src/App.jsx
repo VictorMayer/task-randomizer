@@ -5,19 +5,32 @@ import RandomizeTask from './RandomizeTask'
 
 function App() {
   const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')))
-  const [modal, setModal] = useState(false)
-
+  const [createTaskModal, setCreateTaskModal] = useState(false)
+  const [randomizeTaskModal, setRandomizeTaskModal] = useState(false)
   
   return (
     <>
-      { modal || tasks?.length > 0 ? <></> : <h3>No tasks found</h3> }
+      { createTaskModal || tasks?.length > 0 ? <></> : <h3>No tasks found</h3> }
       
-      {tasks?.length > 0
-      ? <RandomizeTask tasks={tasks} modal={modal} setModal={setModal}/>
-      : <></> 
+      { tasks?.length > 0
+      ? <RandomizeTask 
+          tasks={tasks}
+          createTaskModal={createTaskModal}
+          setCreateTaskModal={setCreateTaskModal}
+          randomizeTaskModal={randomizeTaskModal}
+          setRandomizeTaskModal={setRandomizeTaskModal}
+        />
+      : <></>}
+
+      { randomizeTaskModal 
+      ? <></>
+      :<CreateTasks 
+        tasks={tasks}
+        setTasks={setTasks}
+        createTaskModal={createTaskModal}
+        setCreateTaskModal={setCreateTaskModal}
+      />
       }
-      
-      <CreateTasks tasks={tasks} setTasks={setTasks} modal={modal} setModal={setModal}/>
     </>
   )
 }
