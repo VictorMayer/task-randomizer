@@ -1,9 +1,13 @@
+import CreateTasks from "./CreateTasks";
 
 
-export default function RandomizeTask({tasks}) {
+export default function RandomizeTask({tasks, modal}) {
   return (
     <>
-    {tasks?.length}
+      {modal
+      ? <></>
+      :<button>Randomize Task</button>
+      }
     </>
   )
 }
