@@ -65,7 +65,6 @@ input {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-  margin-top: 20px;
 }
 
 @media (prefers-color-scheme: light) {
