@@ -7,10 +7,7 @@ function App() {
   const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')))
   const [modal, setModal] = useState(false)
 
-  // useEffect(() => {
-  //   setTasks(JSON.parse(localStorage.getItem('tasks')))
-  // }, [tasks])
-
+  
   return (
     <>
       { modal || tasks?.length > 0 ? <></> : <h3>No tasks found</h3> }
