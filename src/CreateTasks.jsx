@@ -17,7 +17,7 @@ export default function CreateTasks({ tasks, setTasks, createTaskModal, setCreat
     if (!duration || !taskTitleToCreate) return window.alert(!taskTitleToCreate ? "Must set a title" : "Must choose a duration");
     
     const newTask = {
-      id: tasks.length,
+      id: tasks?.length || 0,
       title: taskTitleToCreate,
       description: description,
       duration: duration,
