@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 export default function CreateTasks({ tasks, setTasks, createTaskModal, setCreateTaskModal }) {
   const [taskTitleToCreate, setTaskTitleToCreate] = useState("")
+  const [modal, setModal] = useState(false)
   const [isThereDescription, setIsThereDescription] = useState(false);
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState("");
@@ -27,8 +28,10 @@ export default function CreateTasks({ tasks, setTasks, createTaskModal, setCreat
       status: "pending",
     }
 
-    localStorage.setItem('tasks', tasks?.length > 0 ? JSON.stringify([...tasks, {...newTask}]) : JSON.stringify([{...newTask}]));
-    setTasks(JSON.parse(localStorage.getItem('tasks')))
+    setTasks([...tasks, newTask]);
+    // or
+    // localStorage.setItem('tasks', JSON.stringify({tasks: [...tasks, newTask]}));
+    
     setModalInitialStates();
   }
 
@@ -42,8 +45,11 @@ export default function CreateTasks({ tasks, setTasks, createTaskModal, setCreat
 
   return (
     <>
+      { modal || tasks.length < 0 ? <></> : <h3>No tasks found</h3> }
       <form onSubmit={createNewTask}>
+
         <input type='text' placeholder={createTaskModal ? 'Title' : 'Create new task'} value={taskTitleToCreate} onFocus={() => setCreateTaskModal(true)} onChange={(e) => setTaskTitleToCreate(e.target.value)} />
+
       </form>
         { isThereDescription ? <input type="text" placeholder="Description" autoFocus={true} value={description} onChange={(e) => setDescription(e.target.value)}/> : <></> }
       <dialog open={createTaskModal} className='modal'>
