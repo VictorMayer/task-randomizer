@@ -4,7 +4,7 @@ import CreateTasks from './CreateTasks'
 import RandomizeTask from './RandomizeTask'
 
 function Menu({ selectedTask, setSelectedTask }) {
-  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')).filter(t => t.status !== 'pending'))
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks'))?.filter(t => t.status !== 'pending'))
   const [createTaskModal, setCreateTaskModal] = useState(false)
   const [randomizeTaskModal, setRandomizeTaskModal] = useState(false)
 
