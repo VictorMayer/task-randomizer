@@ -3,8 +3,8 @@ import Menu from './Menu'
 import SelectedTask from './SelectedTask'
 
 function App() {
-  const [selectedTask, setSelectedTask] = useState(JSON.parse(localStorage.getItem('selected')) > 0 ? JSON.parse(localStorage.getItem('selected'))[0] : false)
-
+  const [selectedTask, setSelectedTask] = useState(JSON.parse(localStorage.getItem('selected')).length > 0 ? JSON.parse(localStorage.getItem('selected'))[0] : false)
+  console.log(JSON.parse(localStorage.getItem('selected')))
   return (
     <>
       { selectedTask 

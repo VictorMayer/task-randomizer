@@ -33,7 +33,7 @@ export default function RandomizeTask({tasks, createTaskModal, randomizeTaskModa
     setRandomizeTaskModal(false);
     targetTaskList[index].status = 'active';
     targetTaskList[index].startedAt = Date.now();
-    localStorage.setItem('selected', JSON.stringify(targetTaskList));
+    localStorage.setItem('selected', JSON.stringify([targetTaskList[index]]));
     setSelectedTask(targetTaskList[index]);
   } 
 
