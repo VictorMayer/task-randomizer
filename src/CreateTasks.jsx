@@ -20,6 +20,8 @@ export default function CreateTasks({ tasks, setTasks, createTaskModal, setCreat
       description: description,
       duration: duration,
       createdAt: Date.now(),
+      startedAt: null,
+      completedAt: null,
       status: "pending",
     }
 
@@ -55,10 +57,10 @@ export default function CreateTasks({ tasks, setTasks, createTaskModal, setCreat
 
         <br/>
         <p>Task estimated duration:</p>
-        <button onClick={() => setDuration('00:15')}>up to 15 min</button>
-        <button onClick={() => setDuration('00:30')}>up to 30 min</button>
-        <button onClick={() => setDuration('01:00')}>up to 1 Hour</button>
-        <button onClick={() => setDuration('99:99')}>1 Hour +</button>
+        <button onClick={() => setDuration('instant')}>up to 15 min</button>
+        <button onClick={() => setDuration('short')}>up to 30 min</button>
+        <button onClick={() => setDuration('medium')}>up to 1 Hour</button>
+        <button onClick={() => setDuration('long')}>1 Hour +</button>
         <form>
           <button onClick={saveTaskToStorage}>Save task</button>
         </form>    

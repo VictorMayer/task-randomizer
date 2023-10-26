@@ -42,6 +42,12 @@
   padding: 5px 12px;
 }
 
+.beta {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
 input {
   margin-bottom: 5px;
 }

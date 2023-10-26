@@ -1,9 +1,33 @@
+import styled from "styled-components";
+import { useState } from "react";
 
+export default function RandomizeTask({tasks, createTaskModal, randomizeTaskModal, setRandomizeTaskModal, setSelectedTask}) {
+  const [duration, setDuration] = useState({ "instant": false, "short": false, "medium": false, "long": false });
 
-export default function RandomizeTask({tasks, createTaskModal, randomizeTaskModal, setRandomizeTaskModal}) {
   const randomize = (e) => {
     e.preventDefault();
+    let targetTaskList = []; 
+    const targetDurations = [];
+    
+    for (let i in duration) {
+      if (duration[i] === true) {
+        targetDurations.push(i);
+      }
+    }
+    
+    targetDurations.forEach((t) => {
+      if (duration[t] === true) {
+        const filteredList = tasks.filter(task => task.duration === t)
+        targetTaskList = [...targetTaskList, ...filteredList];
+      }
+    });
 
+    const index = Math.round(Math.random() * ((targetTaskList.length - 1)  - 0)) + 0;
+    console.log(targetTaskList[index]);
+    setRandomizeTaskModal(false);
+    targetTaskList[index].status = 'active';
+    targetTaskList[index].startedAt = Date.now();
+    setSelectedTask(targetTaskList[index]);
   } 
 
   return (
@@ -18,10 +42,10 @@ export default function RandomizeTask({tasks, createTaskModal, randomizeTaskModa
           <dialog open={randomizeTaskModal} className="modal">
             <button className='closeButton' onClick={() => setRandomizeTaskModal(false)}>X</button>
             <p>Choose task size: <br/> {}</p>
-            <button>up to 15 min</button>
-            <button>up to 30 min</button>
-            <button>up to 1 Hour</button>
-            <button>1 Hour +</button>
+            <DurationButton duration={duration.instant} onClick={() => setDuration({...duration, "instant": !duration.instant})}>up to 15 min</DurationButton>
+            <DurationButton duration={duration.short} onClick={() => setDuration({...duration, "short": !duration.short})}>up to 30 min</DurationButton>
+            <DurationButton duration={duration.medium} onClick={() => setDuration({...duration, "medium": !duration.medium})}>up to 1 Hour</DurationButton>
+            <DurationButton duration={duration.long} onClick={() => setDuration({...duration, "long": !duration.long})}>1 Hour +</DurationButton>
             <br/>
             <form onSubmit={randomize}>
               <button>Randomize</button>
@@ -33,3 +57,17 @@ export default function RandomizeTask({tasks, createTaskModal, randomizeTaskModa
     </>
   )
 }
+
+const DurationButton = styled.button`
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  color: ${ props => props.duration ? "#1a1a1a" : "#FFFFDA" };
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: ${ props => props.duration ? "#FFFFDA" : "#1a1a1a" };
+  cursor: pointer;
+  transition: border-color 0.25s;
+  border-style: none;
+`
