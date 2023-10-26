@@ -8,14 +8,16 @@ export default function CreateTasks({ tasks, setTasks, createTaskModal, setCreat
 
   const createNewTask = (e) => {
     e.preventDefault();
-    console.log(taskTitleToCreate);
     setCreateTaskModal(true);
   }
 
   const saveTaskToStorage = (e) => {
     e.preventDefault();
     
+    if (!duration || !taskTitleToCreate) return window.alert(!taskTitleToCreate ? "Must set a title" : "Must choose a duration");
+    
     const newTask = {
+      id: tasks.length,
       title: taskTitleToCreate,
       description: description,
       duration: duration,
@@ -41,7 +43,7 @@ export default function CreateTasks({ tasks, setTasks, createTaskModal, setCreat
   return (
     <>
       <form onSubmit={createNewTask}>
-        <input type='text' placeholder='Create new task' value={taskTitleToCreate} onFocus={() => setCreateTaskModal(true)} onChange={(e) => setTaskTitleToCreate(e.target.value)} />
+        <input type='text' placeholder={createTaskModal ? 'Title' : 'Create new task'} value={taskTitleToCreate} onFocus={() => setCreateTaskModal(true)} onChange={(e) => setTaskTitleToCreate(e.target.value)} />
       </form>
         { isThereDescription ? <input type="text" placeholder="Description" autoFocus={true} value={description} onChange={(e) => setDescription(e.target.value)}/> : <></> }
       <dialog open={createTaskModal} className='modal'>

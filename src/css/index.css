@@ -70,6 +70,18 @@ input {
   margin-top: 20px;
 }
 
+.social-media {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  font-size: 10px;
+}
+.social-media a {
+  font-style: none;
+  text-decoration: none;
+  color: rgb(117, 117, 117);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

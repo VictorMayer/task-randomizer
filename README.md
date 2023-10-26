@@ -1,8 +1,14 @@
-# React + Vite
+<h1>Task Randomizer</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p>This simple page application is destined to the undecided people just like me</p>
+<p>Its purpose is to help you when you have many things to do but don't know what to do first</p>
+<p>After you create your tasks, just press the Randomize button, set how much time you have available, and that's it... A wild random task will appear for you!</p>
 
-Currently, two official plugins are available:
+<br/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p>The application is still running the beta version. The <strong>view-tasks</strong> feature will be released soon. This feature will let you list all the pending tasks and all the completed tasks, and sort them by title, duration, status, newest or oldest.
+</p>
+
+<p>Another work-in-progress feature is the responsive mobile interface. Currently, only the desktop perspective is supported. Use mobile perspective at your own risk... <br/> (of being annoyed with poor interface)
+</p>
+

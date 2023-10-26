@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { useState } from "react";
 
 export default function RandomizeTask({tasks, createTaskModal, randomizeTaskModal, setRandomizeTaskModal, setSelectedTask}) {
-  const [duration, setDuration] = useState({ "instant": false, "short": false, "medium": false, "long": false });
+  const initialState = { "instant": false, "short": false, "medium": false, "long": false };
+  const [duration, setDuration] = useState(initialState);
 
   const randomize = (e) => {
     e.preventDefault();
@@ -17,18 +18,29 @@ export default function RandomizeTask({tasks, createTaskModal, randomizeTaskModa
     
     targetDurations.forEach((t) => {
       if (duration[t] === true) {
-        const filteredList = tasks.filter(task => task.duration === t)
+        const filteredList = tasks.filter(task => task.duration === t && task.status === 'pending')
         targetTaskList = [...targetTaskList, ...filteredList];
       }
     });
 
+    if (!targetTaskList.length) {
+      setDuration(initialState);
+      setRandomizeTaskModal(false); 
+      return window.alert("No pending tasks with selected duration")
+    }
     const index = Math.round(Math.random() * ((targetTaskList.length - 1)  - 0)) + 0;
     console.log(targetTaskList[index]);
     setRandomizeTaskModal(false);
     targetTaskList[index].status = 'active';
     targetTaskList[index].startedAt = Date.now();
+    localStorage.setItem('selected', JSON.stringify(targetTaskList));
     setSelectedTask(targetTaskList[index]);
   } 
+
+  const closeRandomizeModal = () => {
+    setDuration(initialState);
+    setRandomizeTaskModal(false);
+  }
 
   return (
     <>
@@ -40,7 +52,7 @@ export default function RandomizeTask({tasks, createTaskModal, randomizeTaskModa
       {randomizeTaskModal
       ? <>
           <dialog open={randomizeTaskModal} className="modal">
-            <button className='closeButton' onClick={() => setRandomizeTaskModal(false)}>X</button>
+            <button className='closeButton' onClick={closeRandomizeModal}>X</button>
             <p>Choose task size: <br/> {}</p>
             <DurationButton duration={duration.instant} onClick={() => setDuration({...duration, "instant": !duration.instant})}>up to 15 min</DurationButton>
             <DurationButton duration={duration.short} onClick={() => setDuration({...duration, "short": !duration.short})}>up to 30 min</DurationButton>
