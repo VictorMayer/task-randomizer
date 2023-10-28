@@ -4,6 +4,10 @@ import styled from "styled-components"
 export default function SelectedTask({ selectedTask, setSelectedTask }) {
   const startedTime = new Date(selectedTask.startedAt);
 
+  const cancelActiveTask = () => {
+    // create cancel task function
+  }
+
   const completeTask = () => {
     localStorage.removeItem('selected');
     const taskList = JSON.parse(localStorage.getItem('tasks'));
@@ -35,7 +39,7 @@ export default function SelectedTask({ selectedTask, setSelectedTask }) {
   return (
     <CustomDiv>
       <dialog open className="modal">
-      <div className='closeButton'>X</div>
+      <div className='closeButton' onClick={cancelActiveTask}>X</div>
         <p>Task: </p>
         <button>{selectedTask.title}</button>
         { selectedTask.description 
