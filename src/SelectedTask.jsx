@@ -6,6 +6,14 @@ export default function SelectedTask({ selectedTask, setSelectedTask }) {
 
   const cancelActiveTask = () => {
     // create cancel task function
+    const taskList = JSON.parse(localStorage.getItem('tasks'));
+    for (let i in taskList) {
+      if (taskList.id === selectedTask.id) {
+        taskList[i].status = "pending";
+        taskList[i].startedAt = null;
+      }
+    }
+    setSelectedTask(false);
   }
 
   const completeTask = () => {
@@ -97,6 +105,7 @@ const CustomDiv = styled.div`
     top: 10px;
     padding: 5px 12px;
     border-radius: 5px;
+    cursor:pointer;
   }
 
   .complete {
