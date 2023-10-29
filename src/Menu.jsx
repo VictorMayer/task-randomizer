@@ -9,6 +9,7 @@ function Menu({ selectedTask, setSelectedTask }) {
   const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks'))?.filter(t => t.status !== 'pending'))
   const [createTaskModal, setCreateTaskModal] = useState(false)
   const [randomizeTaskModal, setRandomizeTaskModal] = useState(false)
+  const [viewTasksModal, setViewTasksModal] = useState(false)
 
   return (
     <>
@@ -35,7 +36,7 @@ function Menu({ selectedTask, setSelectedTask }) {
         />
       }
 
-      { viewTasksModal ? <ViewTasks/> : <></> }
+      { tasks?.length > 0 ? <ViewTasks/> : <></> }
     </>
   )
 }
