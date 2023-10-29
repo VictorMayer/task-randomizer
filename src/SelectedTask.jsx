@@ -5,7 +5,6 @@ export default function SelectedTask({ selectedTask, setSelectedTask }) {
   const startedTime = new Date(selectedTask.startedAt);
 
   const cancelActiveTask = () => {
-    // create cancel task function
     const taskList = JSON.parse(localStorage.getItem('tasks'));
     for (let i in taskList) {
       if (taskList.id === selectedTask.id) {
@@ -13,6 +12,7 @@ export default function SelectedTask({ selectedTask, setSelectedTask }) {
         taskList[i].startedAt = null;
       }
     }
+    window.alert(`The task ${selectedTask.title} has been cancelled!`);
     setSelectedTask(false);
   }
 

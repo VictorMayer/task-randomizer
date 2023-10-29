@@ -3,6 +3,7 @@ import { useState } from 'react'
 import './css/App.css'
 import CreateTasks from './CreateTasks'
 import RandomizeTask from './RandomizeTask'
+import ViewTasks from './ViewTasks'
 
 function Menu({ selectedTask, setSelectedTask }) {
   const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks'))?.filter(t => t.status !== 'pending'))
@@ -11,7 +12,6 @@ function Menu({ selectedTask, setSelectedTask }) {
 
   return (
     <>
-      <p className='beta'>Beta Access</p>
       { createTaskModal || tasks?.length > 0 ? <></> : <h3>No tasks found</h3> }
       
       { tasks?.length > 0 && !selectedTask
@@ -34,6 +34,8 @@ function Menu({ selectedTask, setSelectedTask }) {
           setCreateTaskModal={setCreateTaskModal}
         />
       }
+
+      { viewTasksModal ? <ViewTasks/> : <></> }
     </>
   )
 }
